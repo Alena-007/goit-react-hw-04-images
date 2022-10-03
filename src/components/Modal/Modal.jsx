@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Overlay, ModalBox } from './Modal.styled';
+import PropTypes from 'prop-types';
 
 export class Modal extends Component {
   componentDidMount() {
@@ -32,3 +33,8 @@ export class Modal extends Component {
     );
   }
 }
+
+Modal.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  bigPhoto: PropTypes.string.isRequired,
+};
