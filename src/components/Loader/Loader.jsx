@@ -1,12 +1,15 @@
-import { RotatingLines } from 'react-loader-spinner';
+import { Watch } from 'react-loader-spinner';
 
 export const Loader = () => {
   return (
-    <RotatingLines
-      strokeColor="#4B0082"
-      strokeWidth="5"
-      animationDuration="0.75"
-      width="96"
+    <Watch
+      height="80"
+      width="80"
+      radius="48"
+      color="#4B0082"
+      ariaLabel="watch-loading"
+      wrapperStyle={{ justifyContent: 'center' }}
+      wrapperClassName=""
       visible={true}
     />
   );

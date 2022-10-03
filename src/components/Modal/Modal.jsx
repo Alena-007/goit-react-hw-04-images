@@ -24,8 +24,8 @@ export class Modal extends Component {
 
   render() {
     return (
-      <Overlay className="Overlay" onClick={this.handleBackdropClick}>
-        <ModalBox className="Modal">
+      <Overlay onClick={this.handleBackdropClick}>
+        <ModalBox>
           <img src={this.props.bigPhoto} alt="" />
         </ModalBox>
       </Overlay>

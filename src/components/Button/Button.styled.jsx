@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 
 export const ButtonLoadMore = styled.button`
-  min-width: ${p => p.theme.space[8]}px;
-  align-items: center;
+  width: ${p => p.theme.space[8]}px;
+  text-align: center;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
   padding: ${p => p.theme.space[3]}px;
   margin-top: ${p => p.theme.space[3]}px;
   background-color: ${p => p.theme.colors.primary};
