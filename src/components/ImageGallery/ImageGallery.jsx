@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
+import { ImageGalleryList } from './ImageGallery.styled';
 
 export class ImageGallery extends Component {
   state = {
@@ -16,7 +17,7 @@ export class ImageGallery extends Component {
     const { images, takeLargeImage } = this.props;
     return (
       <>
-        <ul className="ImageGallery">
+        <ImageGalleryList className="ImageGallery">
           {images.map(({ webformatURL, largeImageURL, id }) => (
             <ImageGalleryItem
               smallPhoto={webformatURL}
@@ -25,7 +26,7 @@ export class ImageGallery extends Component {
               onClick={() => takeLargeImage(largeImageURL)}
             />
           ))}
-        </ul>
+        </ImageGalleryList>
       </>
     );
   }

@@ -7,6 +7,7 @@ import { Modal } from './Modal/Modal.jsx';
 import { Loader } from './Loader/Loader.jsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AppStyled } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -77,7 +78,7 @@ export class App extends Component {
     const { images, isOpenModal, largeImageURL, loading } = this.state;
     const { handleFormSubmit, onClick } = this;
     return (
-      <>
+      <AppStyled>
         <Searchbar handleFormSubmit={handleFormSubmit} />
         <ImageGallery images={images} takeLargeImage={this.takeLargeImage} />
         {images.length >= 12 && <Button onClick={onClick} />}
@@ -86,7 +87,7 @@ export class App extends Component {
         )}
         {loading && <Loader />}
         <ToastContainer autoClose={3000} />
-      </>
+      </AppStyled>
     );
   }
 }
