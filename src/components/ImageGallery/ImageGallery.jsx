@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 export class ImageGallery extends Component {
   state = {
+    request: '',
     webformatURL: '',
     largeImageURL: '',
     id: '',
@@ -18,14 +19,15 @@ export class ImageGallery extends Component {
     const { images, takeLargeImage } = this.props;
     return (
       <>
-        <ImageGalleryList className="ImageGallery">
+        <ImageGalleryList>
           {images.map(({ webformatURL, largeImageURL, id }) => (
-            <ImageGalleryItem
-              smallPhoto={webformatURL}
-              bigPhoto={largeImageURL}
-              key={id}
-              onClick={() => takeLargeImage(largeImageURL)}
-            />
+            <li key={id}>
+              <ImageGalleryItem
+                smallPhoto={webformatURL}
+                bigPhoto={largeImageURL}
+                onClick={() => takeLargeImage(largeImageURL)}
+              />
+            </li>
           ))}
         </ImageGalleryList>
       </>
@@ -41,4 +43,5 @@ ImageGallery.propTypes = {
       webformatURL: PropTypes.string.isRequired,
     })
   ),
+  takeLargeImage: PropTypes.func.isRequired,
 };

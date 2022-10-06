@@ -35,6 +35,6 @@ export class Modal extends Component {
 }
 
 Modal.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  modalClose: PropTypes.func.isRequired,
   bigPhoto: PropTypes.string.isRequired,
 };

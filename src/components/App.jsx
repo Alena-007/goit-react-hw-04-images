@@ -17,6 +17,8 @@ export class App extends Component {
     page: 1,
     isOpenModal: false,
     largeImageURL: '',
+    error: null,
+    total: null,
   };
 
   onModalOpen = () => this.setState({ isOpenModal: true });
@@ -35,6 +37,7 @@ export class App extends Component {
       setTimeout(() => {
         fetchImages(request, page)
           .then(images => {
+            this.setState({ total: images.total });
             if (images.total === 0) {
               return toast.error(
                 'Sorry, there are no images matching your search query. Please try again.'
@@ -49,22 +52,22 @@ export class App extends Component {
               this.setState({
                 images: [...images.hits],
               });
-              toast.success(`Hooray! We found ${images.total} images.`);
             }
           })
           .catch(error => this.setState({ error: error.message }))
           .finally(() => this.setState({ loading: false }));
-      }, 300);
+      }, 500);
     }
   }
 
   handleFormSubmit = request => {
-    this.setState(prevState => ({
-      ...prevState,
-      request: request,
-      page: 1,
-      images: [],
-    }));
+    this.setState(prevState => {
+      if (prevState.request === request) {
+        return;
+      } else {
+        return this.setState({ request, page: 1, images: [] });
+      }
+    });
   };
 
   onClick = () => {
@@ -75,17 +78,31 @@ export class App extends Component {
   };
 
   render() {
-    const { images, isOpenModal, largeImageURL, loading } = this.state;
+    const { images, isOpenModal, largeImageURL, loading, error, total } =
+      this.state;
     const { handleFormSubmit, onClick } = this;
     return (
       <AppStyled>
-        <Searchbar handleFormSubmit={handleFormSubmit} />
-        <ImageGallery images={images} takeLargeImage={this.takeLargeImage} />
-        {images.length >= 12 && <Button onClick={onClick} />}
+        <Searchbar onSubmit={handleFormSubmit} />
+        {error && toast.error(error)}
+        {images.length > 0 ? (
+          <>
+            <ImageGallery
+              images={images}
+              takeLargeImage={this.takeLargeImage}
+            ></ImageGallery>
+            {loading ? (
+              <Loader />
+            ) : (
+              total !== images.length && <Button onClick={onClick} />
+            )}
+          </>
+        ) : (
+          <>{loading && <Loader />}</>
+        )}
         {isOpenModal && (
           <Modal bigPhoto={largeImageURL} modalClose={this.onModalClose} />
         )}
-        {loading && <Loader />}
         <ToastContainer autoClose={3000} />
       </AppStyled>
     );

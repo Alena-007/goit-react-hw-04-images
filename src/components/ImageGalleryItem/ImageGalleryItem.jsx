@@ -10,8 +10,7 @@ export function ImageGalleryItem({ smallPhoto, bigPhoto, id, onClick }) {
 }
 
 ImageGalleryItem.propTypes = {
-  smallPhoto: PropTypes.string.isRequired,
-  bigPhoto: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-  onClick: PropTypes.func.isRequired,
+  smallPhoto: PropTypes.string,
+  bigPhoto: PropTypes.string,
+  id: PropTypes.number,
 };

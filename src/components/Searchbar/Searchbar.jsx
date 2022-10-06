@@ -19,12 +19,12 @@ export class Searchbar extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.request.trim() === '') {
-      toast.error('Enter your request in the field');
-      return;
+    const { request } = this.state;
+    if (request.trim() === '') {
+      return toast('Enter your request in the field');
     }
-    this.props.handleFormSubmit(this.state.request);
-    this.setState({ request: '' });
+
+    this.props.onSubmit(this.state.request);
   };
 
   render() {

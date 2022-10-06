@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ImageItem = styled.li`
+export const ImageItem = styled.div`
   border-radius: ${p => p.theme.radii.md};
 `;
 
