@@ -56,18 +56,14 @@ export class App extends Component {
           })
           .catch(error => this.setState({ error: error.message }))
           .finally(() => this.setState({ loading: false }));
-      }, 500);
+      }, 250);
     }
   }
 
   handleFormSubmit = request => {
-    this.setState(prevState => {
-      if (prevState.request === request) {
-        return;
-      } else {
-        return this.setState({ request, page: 1, images: [] });
-      }
-    });
+    if (this.state.request !== request) {
+      this.setState({ request, page: 1, images: [] });
+    }
   };
 
   onClick = () => {
