@@ -1,38 +1,34 @@
-import { Component } from 'react';
+import { useEffect } from 'react';
 import { Overlay, ModalBox } from './Modal.styled';
 import PropTypes from 'prop-types';
 
-export class Modal extends Component {
-  componentDidMount() {
-    window.addEventListener('keydown', this.onEscPress);
-  }
+export const Modal = ({ modalClose, bigPhoto }) => {
+  useEffect(() => {
+    const onEscPress = e => {
+      if (e.code === 'Escape') {
+        modalClose();
+      }
+    };
+    window.addEventListener('keydown', onEscPress);
+    return () => {
+      window.removeEventListener('keydown', onEscPress);
+    };
+  }, [modalClose, bigPhoto]);
 
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.onEscPress);
-  }
-
-  handleBackdropClick = e => {
+  const handleBackdropClick = e => {
     if (e.target === e.currentTarget) {
-      this.props.modalClose();
+      modalClose();
     }
   };
 
-  onEscPress = e => {
-    if (e.code === 'Escape') {
-      this.props.modalClose();
-    }
-  };
-
-  render() {
-    return (
-      <Overlay onClick={this.handleBackdropClick}>
-        <ModalBox>
-          <img src={this.props.bigPhoto} alt="" />
-        </ModalBox>
-      </Overlay>
-    );
-  }
-}
+  return (
+    <Overlay onClick={handleBackdropClick}>
+      <ModalBox>
+        <img src={bigPhoto} alt="" />
+      </ModalBox>
+    </Overlay>
+  );
+};
 
 Modal.propTypes = {
   modalClose: PropTypes.func.isRequired,
