@@ -54,7 +54,7 @@ export const App = () => {
     if (request === searchImage) {
       return;
     } else {
-      setRequest(request);
+      setRequest(searchImage);
       setPage(1);
       setImages([]);
     }
